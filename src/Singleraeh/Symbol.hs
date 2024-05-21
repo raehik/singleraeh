@@ -6,7 +6,6 @@ import Singleraeh.List ( SList(..) )
 import Singleraeh.Maybe ( SMaybe(..) )
 import Singleraeh.Tuple ( STuple2(..) )
 import GHC.TypeLits
-import DeFun.Core
 import Unsafe.Coerce ( unsafeCoerce )
 
 sConsSymbol :: SChar ch -> SSymbol str -> SSymbol (ConsSymbol ch str)
