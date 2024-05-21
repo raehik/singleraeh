@@ -1,5 +1,6 @@
 module Singleraeh.Tuple where
 
+import Singleraeh.Demote
 import Data.Kind ( Type )
 
 type STuple2 :: (a -> Type) -> (b -> Type) -> (a, b) -> Type
@@ -13,3 +14,7 @@ demoteSTuple2
     -> STuple2 sa sb ab
     -> (da, db)
 demoteSTuple2 demoteSA demoteSB (STuple2 sa sb) = (demoteSA sa, demoteSB sb)
+
+instance (Demotable sa, Demotable sb) => Demotable (STuple2 sa sb) where
+    type Demote (STuple2 sa sb) = (Demote sa, Demote sb)
+    demote = demoteSTuple2 demote demote

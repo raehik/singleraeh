@@ -1,6 +1,7 @@
 module Singleraeh.List where
 
 import Data.Kind ( Type )
+import Singleraeh.Demote
 
 -- | Singleton list.
 type SList :: (a -> Type) -> [a] -> Type
@@ -16,3 +17,7 @@ demoteSList
 demoteSList demoteSA = \case
   SCons sa sas -> demoteSA sa : demoteSList demoteSA sas
   SNil         -> []
+
+instance Demotable sa => Demotable (SList sa) where
+    type Demote (SList sa) = [Demote sa]
+    demote = demoteSList demote

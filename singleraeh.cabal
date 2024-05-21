@@ -23,6 +23,7 @@ extra-source-files:
 
 library
   exposed-modules:
+      Singleraeh.Demote
       Singleraeh.Either
       Singleraeh.Equality
       Singleraeh.List
