@@ -3,6 +3,15 @@ module Singleraeh.Tuple where
 import Singleraeh.Demote
 import Data.Kind ( Type )
 
+data SUnit (unit :: ()) where SUnit :: SUnit '()
+
+demoteSUnit :: SUnit unit -> ()
+demoteSUnit SUnit = ()
+
+instance Demotable SUnit where
+    type Demote SUnit = ()
+    demote = demoteSUnit
+
 type STuple2 :: (a -> Type) -> (b -> Type) -> (a, b) -> Type
 data STuple2 sa sb ab where
     STuple2 :: sa a -> sb b -> STuple2 sa sb '(a, b)
