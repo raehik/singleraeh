@@ -20,3 +20,7 @@ instance Demotable SNat where
 instance Demotable SSymbol where
     type Demote SSymbol = String
     demote = fromSSymbol
+
+instance Demotable SChar where
+    type Demote SChar = Char
+    demote = fromSChar
