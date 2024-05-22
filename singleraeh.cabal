@@ -29,6 +29,7 @@ library
       Singleraeh.List
       Singleraeh.Maybe
       Singleraeh.Natural
+      Singleraeh.Sing
       Singleraeh.Symbol
       Singleraeh.Tuple
   other-modules:
