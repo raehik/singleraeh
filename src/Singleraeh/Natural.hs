@@ -6,6 +6,9 @@ import Unsafe.Coerce ( unsafeCoerce )
 (%+) :: SNat n -> SNat m -> SNat (n + m)
 n %+ m = withSomeSNat (fromSNat n + fromSNat m) unsafeCoerce
 
+(%*) :: SNat n -> SNat m -> SNat (n * m)
+n %* m = withSomeSNat (fromSNat n * fromSNat m) unsafeCoerce
+
 (%-) :: SNat n -> SNat m -> SNat (n - m)
 n %- m = withSomeSNat (fromSNat n - fromSNat m) unsafeCoerce
 
