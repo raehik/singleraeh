@@ -1,3 +1,5 @@
+{-# LANGUAGE UndecidableInstances #-}
+
 module Singleraeh.List where
 
 import Data.Kind ( Type )
@@ -21,3 +23,17 @@ demoteSList demoteSA = \case
 instance Demotable sa => Demotable (SList sa) where
     type Demote (SList sa) = [Demote sa]
     demote = demoteSList demote
+
+-- | Reverse a type level list.
+type Reverse as = Reverse' '[] as
+type family Reverse' (acc :: [k]) (as :: [k]) :: [k] where
+  Reverse' acc (a : as) = Reverse' (a : acc) as
+  Reverse' acc '[]      = acc
+
+sReverse :: SList sa as -> SList sa (Reverse as)
+sReverse as = sReverse' SNil as
+
+sReverse' :: SList sa acc -> SList sa as -> SList sa (Reverse' acc as)
+sReverse' acc = \case
+  SCons a as -> sReverse' (SCons a acc) as
+  SNil       -> acc
