@@ -1,3 +1,7 @@
+## Unreleased
+* remove `Sing`, provide `SingI` instead
+* add `SBool` (singled booleans)
+
 ## 0.2.1 (2024-05-27)
 * add `Reverse` for lists
 
