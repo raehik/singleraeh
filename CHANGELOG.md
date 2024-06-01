@@ -1,4 +1,4 @@
-## Unreleased
+## 0.3.0 (2024-06-01)
 * remove `Sing`, provide `SingI` instead
 * add `SBool` (singled booleans)
 * add `STuple3`
