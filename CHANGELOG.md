@@ -1,3 +1,6 @@
+## 0.4.0 (2024-06-01)
+* oops, remove unused temporary `singletons` dependency
+
 ## 0.3.0 (2024-06-01)
 * remove `Sing`, provide `SingI` instead
 * add `SBool` (singled booleans)
