@@ -1,6 +1,6 @@
 module Singleraeh.Maybe where
 
-import Data.Kind ( Type )
+import Data.Kind ( Type, Constraint )
 import Singleraeh.Demote
 
 -- | Singleton 'Maybe'.
@@ -21,3 +21,20 @@ demoteSMaybe demoteSA = \case
 instance Demotable sa => Demotable (SMaybe sa) where
     type Demote (SMaybe sa) = Maybe (Demote sa)
     demote = demoteSMaybe demote
+
+class SingMaybe (ca :: ak -> Constraint) (sa :: ak -> Type) (ma :: Maybe ak) where
+    singMaybe'
+        :: (forall a. ca a => sa a)
+        -> SMaybe sa ma
+
+singMaybe
+    :: forall ca sa ma. SingMaybe ca sa ma
+    => (forall a. ca a => sa a)
+    -> SMaybe sa ma
+singMaybe = singMaybe' @_ @ca
+
+instance ca a => SingMaybe ca sa (Just a) where
+    singMaybe' sa = SJust sa
+
+instance SingMaybe ca sa Nothing where
+    singMaybe' _  = SNothing

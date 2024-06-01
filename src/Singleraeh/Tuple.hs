@@ -1,7 +1,7 @@
 module Singleraeh.Tuple where
 
 import Singleraeh.Demote
-import Data.Kind ( Type )
+import Data.Kind ( Type, Constraint )
 
 data SUnit (unit :: ()) where SUnit :: SUnit '()
 
@@ -27,3 +27,19 @@ demoteSTuple2 demoteSA demoteSB (STuple2 sa sb) = (demoteSA sa, demoteSB sb)
 instance (Demotable sa, Demotable sb) => Demotable (STuple2 sa sb) where
     type Demote (STuple2 sa sb) = (Demote sa, Demote sb)
     demote = demoteSTuple2 demote demote
+
+class SingTuple2 (cl :: lk -> Constraint) (cr :: rk -> Constraint) (sl :: lk -> Type) (sr :: rk -> Type) (lr :: (lk, rk)) where
+    singTuple2'
+        :: (forall l. cl l => sl l)
+        -> (forall r. cr r => sr r)
+        -> STuple2 sl sr lr
+
+singTuple2
+    :: forall cl cr sl sr lr. SingTuple2 cl cr sl sr lr
+    => (forall l. cl l => sl l)
+    -> (forall r. cr r => sr r)
+    -> STuple2 sl sr lr
+singTuple2 = singTuple2' @_ @_ @cl @cr
+
+instance (cl l, cr r) => SingTuple2 cl cr sl sr '(l, r) where
+    singTuple2' sl sr = STuple2 sl sr
