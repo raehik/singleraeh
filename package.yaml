@@ -9,6 +9,7 @@ category: Types, Data
 license: MIT
 license-file: LICENSE
 tested-with:
+- GHC==9.10
 - GHC==9.8
 - GHC==9.6
 

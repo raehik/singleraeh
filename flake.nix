@@ -13,8 +13,8 @@
   outputs = inputs:
   let
     # simple devshell for non-dev compilers: really just want `cabal repl`
-    nondevDevShell = compiler: {
-      mkShellArgs.name = "${compiler}-singleraeh";
+    defDevShell = compiler: {
+      mkShellArgs.name = "${compiler}";
       hoogle = false;
       tools = _: {
         hlint = null;
@@ -27,23 +27,19 @@
       systems = inputs.nixpkgs.lib.systems.flakeExposed;
       imports = [ inputs.haskell-flake.flakeModule ];
       perSystem = { self', pkgs, config, ... }: {
-        packages.default  = self'.packages.ghc96-singleraeh;
-        devShells.default = self'.devShells.ghc96;
+        packages.default  = self'.packages.ghc98-singleraeh;
+        devShells.default = self'.devShells.ghc98;
+        haskellProjects.ghc910 = {
+          basePackages = pkgs.haskell.packages.ghc910;
+          devShell = defDevShell "ghc910";
+        };
         haskellProjects.ghc98 = {
           basePackages = pkgs.haskell.packages.ghc98;
-          devShell = nondevDevShell "ghc98";
+          devShell = defDevShell "ghc98";
         };
         haskellProjects.ghc96 = {
           basePackages = pkgs.haskell.packages.ghc96;
-          devShell.mkShellArgs.name = "ghc96-singleraeh";
-        };
-        haskellProjects.ghc94 = {
-          basePackages = pkgs.haskell.packages.ghc94;
-          devShell = nondevDevShell "ghc94";
-        };
-        haskellProjects.ghc92 = {
-          basePackages = pkgs.haskell.packages.ghc92;
-          devShell = nondevDevShell "ghc92";
+          devShell = defDevShell "ghc96";
         };
       };
     };
