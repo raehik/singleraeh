@@ -13,7 +13,7 @@ tested-with:
 - GHC==9.8
 - GHC==9.6
 
-#github: raehik/type-level-show
+github: raehik/singleraeh
 maintainer: Ben Orchard <thefirstmuffinman@gmail.com>
 author: Ben Orchard
 

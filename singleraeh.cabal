@@ -9,6 +9,8 @@ version:        0.4.0
 synopsis:       raehik's singletons
 description:    Please see README.md.
 category:       Types, Data
+homepage:       https://github.com/raehik/singleraeh#readme
+bug-reports:    https://github.com/raehik/singleraeh/issues
 author:         Ben Orchard
 maintainer:     Ben Orchard <thefirstmuffinman@gmail.com>
 license:        MIT
@@ -21,6 +23,10 @@ tested-with:
 extra-source-files:
     README.md
     CHANGELOG.md
+
+source-repository head
+  type: git
+  location: https://github.com/raehik/singleraeh
 
 library
   exposed-modules:
