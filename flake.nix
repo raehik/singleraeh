@@ -1,9 +1,3 @@
-# TODO
-# * better devshell name overriding. clumsy because we can't access the
-#   derivation being used (because it's auto-grabbed). really just wanna change
-#   `ghc-shell-for` to `ghcXY` and keep the `-${pname}-${version}`!
-# * honestly maybe I move away from haskell-flake...? it's weird
-
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -12,13 +6,12 @@
   };
   outputs = inputs:
   let
-    # simple devshell for non-dev compilers: really just want `cabal repl`
     defDevShell = compiler: {
       mkShellArgs.name = "${compiler}";
       hoogle = false;
       tools = _: {
-        hlint = null;
         haskell-language-server = null;
+        hlint = null;
         ghcid = null;
       };
     };

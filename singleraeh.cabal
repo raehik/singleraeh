@@ -55,7 +55,7 @@ library
       TypeFamilies
       DataKinds
       MagicHash
-  ghc-options: -Wall -Wno-unticked-promoted-constructors
+  ghc-options: -fhide-source-paths -Wall
   build-depends:
       base >=4.18 && <5
   default-language: GHC2021
