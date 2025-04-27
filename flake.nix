@@ -20,8 +20,12 @@
       systems = inputs.nixpkgs.lib.systems.flakeExposed;
       imports = [ inputs.haskell-flake.flakeModule ];
       perSystem = { self', pkgs, config, ... }: {
-        packages.default  = self'.packages.ghc98-singleraeh;
-        devShells.default = self'.devShells.ghc98;
+        packages.default  = self'.packages.ghc910-singleraeh;
+        devShells.default = self'.devShells.ghc910;
+        haskellProjects.ghc912 = {
+          basePackages = pkgs.haskell.packages.ghc912;
+          devShell = defDevShell "ghc912";
+        };
         haskellProjects.ghc910 = {
           basePackages = pkgs.haskell.packages.ghc910;
           devShell = defDevShell "ghc910";
@@ -29,10 +33,6 @@
         haskellProjects.ghc98 = {
           basePackages = pkgs.haskell.packages.ghc98;
           devShell = defDevShell "ghc98";
-        };
-        haskellProjects.ghc96 = {
-          basePackages = pkgs.haskell.packages.ghc96;
-          devShell = defDevShell "ghc96";
         };
       };
     };
